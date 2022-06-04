@@ -3,6 +3,7 @@ from classes import *
 address_book = AddressBook()
 
 
+# декоратор для функцій, що працюють з даними вводу користувача
 def input_error(func):
     def wrapper(*args):
         try:
@@ -24,7 +25,6 @@ def add(*args):
     else:
         rec = Record(name, phone)
         address_book.add_record(rec)
-    print(address_book)
     return f'Contact for {name.value} was added'
 
 @input_error
@@ -36,7 +36,6 @@ def change(*args):
         address_book.data[name.value].change_phone(phone_to_change, phone_new)
     else:
         raise ValueError('No person with this name in the address book')
-    print(address_book)
     return f'Phone {phone_to_change.value} of {name.value} was changed to {phone_new.value} '
 
 @input_error
@@ -68,6 +67,7 @@ COMMANDS = {
 }
 
 
+# Парсінг команд від користувача
 def processing(customer_input):
     for k in COMMANDS:
         for command in COMMANDS[k]:
@@ -76,6 +76,7 @@ def processing(customer_input):
                 return k, list_of_data
 
 
+# Логіка взаємодії з користувачем та виводу результата команд
 def main():
     while True:
         customer_input = input(">>>")
