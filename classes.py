@@ -21,7 +21,8 @@ class Record():
     def __init__(self, name: Name, phone: Phone = None):
         self.name = name
         self.phones = []
-        self.phones.append(phone.value)
+        if phone is not None:
+            self.phones.append(phone.value)
 
     # Фукція для додавання нового телефону для юзера
     def add_phone(self, ph: Phone):

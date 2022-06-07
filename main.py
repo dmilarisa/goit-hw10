@@ -2,6 +2,7 @@ from classes import *
 
 address_book = AddressBook()
 
+
 # декоратор для функцій, що працюють з даними вводу користувача
 def input_error(func):
     def wrapper(*args):
@@ -18,11 +19,15 @@ def hello(*args):
 @input_error
 def add(*args):
     name = Name(args[0][0])
-    phone = Phone(args[0][1])
-    if name.value in address_book.data.keys():
-        address_book.data[name.value].add_phone(phone)
-    else:
-        rec = Record(name, phone)
+    try:
+        phone = Phone(args[0][1])
+        if name.value in address_book.data.keys():
+            address_book.data[name.value].add_phone(phone)
+        else:
+            rec = Record(name, phone)
+            address_book.add_record(rec)
+    except IndexError:
+        rec = Record(name)
         address_book.add_record(rec)
     return f'Contact for {name.value} was added'
 
