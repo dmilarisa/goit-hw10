@@ -15,25 +15,24 @@ class Phone(Field):
     pass
 
 
-class Record(UserDict):
+class Record():
 
     # Ініціалізуємо запис, щоб в ній зберігалися обов'язковий параметр ім'я, необов'язковий телефон, а також створюємо список з об'єктів - телефонів
     def __init__(self, name: Name, phone: Phone = None):
-        super().__init__(self)
-        self.data['name'] = name.value
-        self.data['phones'] = []
-        self.data['phones'].append(phone.value)
+        self.name = name
+        self.phones = []
+        self.phones.append(phone.value)
 
     # Фукція для додавання нового телефону для юзера
     def add_phone(self, ph: Phone):
-        self.data['phones'].append(ph.value)
+        self.phones.append(ph.value)
 
     # Функція для зміни телефона на новий
-    def change_phone(self, ph:Phone, new_ph:Phone):
+    def change_phone(self, ph: Phone, new_ph: Phone):
         i = 0
-        while i < len(self.data['phones']):
-            if self.data['phones'][i] == ph.value:
-                self.data['phones'][i] = new_ph.value
+        while i < len(self.phones):
+            if self.phones[i] == ph.value:
+                self.phones[i] = new_ph.value
                 break
             else:
                 i += 1
@@ -41,5 +40,5 @@ class Record(UserDict):
 
 class AddressBook(UserDict):
     def add_record(self, rec: Record):
-        k, i = rec['name'], rec
+        k, i = rec.name.value, rec
         self.data[k] = i

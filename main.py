@@ -2,7 +2,6 @@ from classes import *
 
 address_book = AddressBook()
 
-
 # декоратор для функцій, що працюють з даними вводу користувача
 def input_error(func):
     def wrapper(*args):
@@ -42,14 +41,14 @@ def change(*args):
 def phone(*args):
     name = Name(args[0][0])
     if name.value in address_book.keys():
-        list_of_phones = address_book[name.value]['phones']
+        list_of_phones = address_book[name.value].phones
         return ', '.join(list_of_phones)
 
 
 def show_all(*args):
     str_for_print = ''
     for k in address_book.keys():
-        str_for_print = str_for_print + '{:<10}'.format(k) + ':'+', '.join(address_book[k]['phones']) + '\n'
+        str_for_print = str_for_print + '{:<10}'.format(k) + ':'+', '.join(address_book[k].phones) + '\n'
     return str_for_print
 
 
